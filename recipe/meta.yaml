@@ -12,7 +12,7 @@ source:
 build:
   skip: true  # [osx or py<310]
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -22,7 +22,9 @@ requirements:
   host:
     - pip
     - python
-    - setuptools
+    # The upper bound is a workaround associated the removal of the `pkg_resources` module
+    # from setuptools 82.0.0, which is a dependency of `ansys_tools_protoc_helper`.
+    - setuptools >=42.0.0,<82
 
   run:
     - python
